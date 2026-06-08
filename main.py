@@ -1,6 +1,5 @@
 import os
-import time
-from funcoes import init_files, adicionar_usuario, fazer_login, obter_dados_telemetria
+from funcoes import init_files, adicionar_usuario, fazer_login, obter_dados_telemetria, obter_simulacao_resgate_tempo_real
 
 def limpar_tela() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -36,7 +35,6 @@ while True:
             input_senha: str = input("Digite a sua senha: ").strip()
             
             print(f"\nAutenticando usuario '{input_login}' via conexao segura...")
-            time.sleep(1)
             
             if fazer_login(input_login, input_senha):
                 print("\nConexao efetuada com sucesso! Acesso liberado.")
@@ -68,7 +66,6 @@ while True:
             limpar_tela()
             print("--- PAINEL DE TELEMETRIA IoT (FIWARE / MQTT) ---")
             print("Conectando ao Broker... Recebendo pacotes de dados via Satelite...\n")
-            time.sleep(0.8)
 
             dispositivos: list[dict[str, any]] = obter_dados_telemetria()
 
@@ -85,12 +82,34 @@ while True:
             input("\nPressione ENTER para atualizar e voltar ao menu...")
 
         case "4":
-            limpar_tela()
-            print("--- SIMULADOR DE RESGATE EM TEMPO REAL ---")
-            print("Iniciando disparo automatizado de telemetria...")
-            print("Estabelecendo conexao criptografada via Satelite...")
-            print("\n>> Funcionalidade em desenvolvimento <<")
-            input("\nPressione ENTER para voltar ao menu...")
+            while True:
+                limpar_tela()
+                print("--- SIMULADOR DE RESGATE EM TEMPO REAL ---")
+                print("Escolha o modo de operacao:\n")
+                print("[ 1 ] Localizar alguem")
+                print("[ 2 ] Ser localizado")
+                print("[ 0 ] Voltar ao menu principal")
+
+                opcao_resgate: str = input("\nDigite o numero da opcao: ").strip()
+
+                match opcao_resgate:
+                    case "1":
+                        limpar_tela()
+                        for linha in obter_simulacao_resgate_tempo_real("localizar"):
+                            print(linha)
+                        input("\nPressione ENTER para continuar...")
+                        break
+                    case "2":
+                        limpar_tela()
+                        for linha in obter_simulacao_resgate_tempo_real("ser_localizado"):
+                            print(linha)
+                        input("\nPressione ENTER para continuar...")
+                        break
+                    case "0":
+                        break
+                    case _:
+                        print("\nAVISO: Opcao invalida no simulador!")
+                        input("\nPressione ENTER para continuar...")
             
         case "5":
             limpar_tela()
@@ -105,10 +124,9 @@ while True:
         case "0":
             limpar_tela()
             print("Encerrando conexao com a rede...")
-            time.sleep(1)
             print("Sistema encerrado com sucesso. Ate logo!")
             break
             
         case _:
             print("\nAVISO: Opcao invalida! Por favor, escolha um numero do menu.")
-            time.sleep(1.5)
+            input("\nPressione ENTER para continuar...")

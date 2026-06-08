@@ -108,3 +108,38 @@ def obter_dados_telemetria() -> list[dict[str, any]]:
         esp2["status"] = "CRITICO: Possivel Estresse/Fuga"
 
     return [esp1, esp2]
+
+def obter_simulacao_resgate_tempo_real(modo: str) -> list[str]:
+    dispositivos: list[dict[str, any]] = obter_dados_telemetria()
+    alvo: dict[str, any] = random.choice(dispositivos)
+    missao: str = f"SR-{random.randint(1000, 9999)}"
+    eta: int = random.randint(8, 24)
+
+    if modo == "localizar":
+        return [
+            "--- SIMULADOR DE RESGATE EM TEMPO REAL ---",
+            f"Missao {missao} recebida pelo centro de comando.",
+            "Modo selecionado: localizar alguem.",
+            f"Coordenadas recebidas: Lat {alvo['latitude']} | Long {alvo['longitude']}",
+            f"Pessoa alvo: {alvo['alvo']}",
+            "Sinal confirmado via satelite.",
+            f"Espere que o resgate virá em aproximadamente {eta} minutos.",
+        ]
+
+    if modo == "ser_localizado":
+        return [
+            "--- SIMULADOR DE RESGATE EM TEMPO REAL ---",
+            f"Missao {missao} recebida pelo centro de comando.",
+            "Modo selecionado: ser localizado.",
+            "Seu sinal de emergencia foi detectado.",
+            f"Sua localizacao foi recebida em Lat {alvo['latitude']} | Long {alvo['longitude']}",
+            f"Localizacao de {alvo['alvo']} encontrada nessas coordenadas.",
+            "Resgate em deslocamento para o ponto informado.",
+            f"Mantenha o sinal ativo. ETA estimado: {eta} minutos.",
+        ]
+
+    return [
+        "--- SIMULADOR DE RESGATE EM TEMPO REAL ---",
+        "Opcao invalida no simulador.",
+        "Selecione localizar alguem ou ser localizado.",
+    ]
