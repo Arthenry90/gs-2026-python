@@ -4,17 +4,15 @@ from funcoes import init_files, adicionar_usuario, fazer_login, obter_dados_tele
 def limpar_tela() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def exibir_cabecalho() -> None:
+
+init_files()
+
+while True:
     limpar_tela()
     print("=" * 60)
     print(" OrbitBird Rescue System - Terminal de Operacoes")
     print(" Monitoramento Emergencial Inteligente em Areas Remotas")
     print("=" * 60)
-
-init_files()
-
-while True:
-    exibir_cabecalho()
     print("\nSeja bem-vindo(a) ao sistema de comando e controle!")
     print("Por favor, selecione a opcao desejada:\n")
     
