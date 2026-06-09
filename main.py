@@ -7,7 +7,7 @@ def limpar_tela() -> None:
 def exibir_cabecalho() -> None:
     limpar_tela()
     print("=" * 60)
-    print(" SPACE RESCUE SYSTEM - Terminal de Operacoes")
+    print(" OrbitBird Rescue System - Terminal de Operacoes")
     print(" Monitoramento Emergencial Inteligente em Areas Remotas")
     print("=" * 60)
 
@@ -18,7 +18,7 @@ while True:
     print("\nSeja bem-vindo(a) ao sistema de comando e controle!")
     print("Por favor, selecione a opcao desejada:\n")
     
-    print("[ 1 ] Fazer login de Operador")
+    print("[ 1 ] Fazer login Equpe de Busca")
     print("[ 2 ] Registrar nova conta da Equipe de Busca")
     print("[ 3 ] Painel de Telemetria (Sensores ESP32 / MQTT)")
     print("[ 4 ] Iniciar Simulador de Resgate em Tempo Real")
@@ -64,7 +64,7 @@ while True:
             
         case "3":
             limpar_tela()
-            print("--- PAINEL DE TELEMETRIA IoT (FIWARE / MQTT) ---")
+            print("--- PAINEL DE TELEMETRIA IoT ---")
             print("Conectando ao Broker... Recebendo pacotes de dados via Satelite...\n")
 
             dispositivos: list[dict[str, any]] = obter_dados_telemetria()
@@ -113,8 +113,8 @@ while True:
             
         case "5":
             limpar_tela()
-            print("--- SOBRE O SPACE RESCUE SYSTEM ---")
-            print("O Space Rescue System consiste em uma plataforma inteligente")
+            print("--- SOBRE O OrbitBird Rescue System ---")
+            print("O OrbitBird Rescue System consiste em uma plataforma inteligente")
             print("de monitoramento emergencial desenvolvida para auxiliar operacoes")
             print("de localização e resgate em areas remotas (Montanhas e Florestas).")
             print("\nTecnologia baseada em Edge Computing (ESP32), MQTT e Satelite.")
